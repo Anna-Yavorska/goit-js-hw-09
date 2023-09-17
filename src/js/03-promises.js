@@ -1,6 +1,4 @@
-import { showSuccessMessage } from './functions';
-import { showFailorMessage } from './functions';
-import { getRandomHexColor } from './functions';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const body = document.querySelector('body');
 const form = document.querySelector('.form');
@@ -21,23 +19,24 @@ function handleSubmit(event) {
     if (position === 1) {
       createPromise(position, delayValue)
         .then(({ position, delay }) => {
-          showSuccessMessage(`✅ Fulfilled promise ${position} in ${delay}ms`);
+          showSuccessMessage(`Fulfilled promise ${position} in ${delay}ms`);
         })
         .catch(({ position, delay }) => {
-          showFailorMessage(`❌ Rejected promise ${position} in ${delay}ms`);
+          showFailorMessage(`Rejected promise ${position} in ${delay}ms`);
         });
     } else {
       createPromise(position, delayValue + stepValue * (position - 1))
         .then(({ position, delay }) => {
-          showSuccessMessage(`✅ Fulfilled promise ${position} in ${delay}ms`);
+          showSuccessMessage(`Fulfilled promise ${position} in ${delay}ms`);
         })
         .catch(({ position, delay }) => {
-          showFailorMessage(`❌ Rejected promise ${position} in ${delay}ms`);
+          showFailorMessage(`Rejected promise ${position} in ${delay}ms`);
         });
     }
     form.reset();
   }
 }
+
 function createPromise(position, delay) {
   const shouldResolve = Math.random() > 0.3;
 
@@ -50,4 +49,18 @@ function createPromise(position, delay) {
       }
     }, delay);
   });
+}
+
+function showSuccessMessage(message) {
+  Notify.success(message);
+}
+
+function showFailorMessage(message) {
+  Notify.failure(message);
+}
+
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, 0)}`;
 }

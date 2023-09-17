@@ -1,5 +1,3 @@
-import { getRandomHexColor } from "./functions";
-
 const body = document.querySelector('body');
 const start = document.querySelector('[data-start]');
 const stop = document.querySelector('[data-stop]');
@@ -22,3 +20,9 @@ function stopChanging() {
     clearInterval(intervalId);
     start.disabled = false;
 };
+
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, 0)}`;
+}
