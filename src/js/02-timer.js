@@ -17,6 +17,8 @@ export const refs = {
   seconds: document.querySelector('[data-seconds]'),
 };
 
+refs.start.disabled = true;
+
 let futureDay = null;
 let differenceTime = null;
 const options = {
@@ -51,7 +53,6 @@ const options = {
 flatpickr(refs.input, options);
 
 function calculateTime() {
-  refs.start.disabled = true;
   differenceTime = futureDay - Date.now();
   const time = functions.convertMs(differenceTime);
   const { days, hours, minutes, seconds } = time;
