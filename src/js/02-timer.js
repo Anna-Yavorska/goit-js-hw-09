@@ -42,6 +42,7 @@ const options = {
             return;
           }
         }, 1000);
+        refs.start.disabled = true;
       });
     } else {
       refs.start.disabled = true;
